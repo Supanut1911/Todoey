@@ -30,19 +30,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //find path for realm
         print(Realm.Configuration.defaultConfiguration.fileURL)
         
-        let data = Data()
-        data.name = "nut"
-        data.age = 23
         
-        do {
-            let realm = try Realm()
-            try realm.write{
-                realm.add(data)
-            }
-        } catch {
-            print("Error init new realm",error)
-        }
         
+//        do {
+//            let realm = try Realm()
+//            try realm.write{
+//   
+//            }
+//        } catch {
+//            print("Error init new realm",error)
+//        }
+//        
         return true
     }
     
