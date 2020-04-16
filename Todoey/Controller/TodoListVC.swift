@@ -50,7 +50,11 @@ class TodoListVC: UITableViewController {
         if let item = todoItem?[indexPath.row] {
             do {
                 try realm.write{
-                    item.done = !item.done
+                    //for checkmask item
+//                    item.done = !item.done
+                    
+                    //for delete item
+                    realm.delete(item)
                 }
             } catch {
                 print("Error saving done", error)
