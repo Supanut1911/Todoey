@@ -13,24 +13,13 @@ class CategoryVC: UITableViewController {
     
     let realm = try! Realm()
 
-    var categoryArray = [Category]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var categoryArray: Results<Category>!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadCategory()
-        
-//        let aCatogory = Category()
-//        aCatogory.name = "shopping"
-//        categoryArray.append(aCatogory)
-//        
-//        var aCatogory2 = Category()
-//        aCatogory.name = "shopping2"
-//        categoryArray.append(aCatogory2)
-//        
-//        var aCatogory3 = Category()
-//        aCatogory.name = "shopping3"
-//        categoryArray.append(aCatogory3)
     }
 
   
@@ -45,7 +34,7 @@ class CategoryVC: UITableViewController {
             
             let newCategory = Category()
             newCategory.name = textField.text!
-            self.categoryArray.append(newCategory)
+//            self.categoryArray.append(newCategory)
             
             self.save(category: newCategory)
             self.tableView.reloadData()
@@ -62,13 +51,12 @@ class CategoryVC: UITableViewController {
     
     //MARK:- tableView data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryArray.count
+        return categoryArray?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        let category = categoryArray[indexPath.row]
-        cell.textLabel?.text = category.name
+        cell.textLabel?.text = categoryArray?[indexPath.row].name ?? "No Category Added"
         
         return cell
     }
@@ -102,13 +90,9 @@ class CategoryVC: UITableViewController {
     
     func loadCategory() {
    
-        
-//        do {
-//            categoryArray = try context.fetch(request)
-//        } catch {
-//            print("Error fetching data from context", error)
-//        }
-//        tableView.reloadData()
+        categoryArray = realm.objects(Category.self)
+ 
+        tableView.reloadData()
     }
     
 }
