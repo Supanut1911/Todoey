@@ -20,7 +20,7 @@ class CategoryVC: SwipeTableVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadCategory()
-        tableView.rowHeight = 80
+        
     }
 
   
