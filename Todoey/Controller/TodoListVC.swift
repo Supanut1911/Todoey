@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class TodoListVC: SwipeTableVC {
 
@@ -22,6 +23,7 @@ class TodoListVC: SwipeTableVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.separatorStyle = .none
     
     }
     
@@ -33,6 +35,21 @@ class TodoListVC: SwipeTableVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
+        
+        //version free gradint
+//        if let color = FlatYellow().darken(byPercentage: CGFloat(indexPath.row ) / CGFloat(todoItem!.count)) {
+//            cell.backgroundColor = color
+//            cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+//        }
+        
+        //version gradint from select category
+        if let color = UIColor(hexString: selectedCategory!.color)?.darken(byPercentage: CGFloat(indexPath.row ) / CGFloat(todoItem!.count)) {
+                   cell.backgroundColor = color
+                   cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+               }
+        
+       
         
         if let item = todoItem?[indexPath.row] {
             cell.textLabel?.text = item.title
