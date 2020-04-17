@@ -24,7 +24,17 @@ class TodoListVC: SwipeTableVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
+        navigationController?.navigationBar.backgroundColor = UIColor(hexString: selectedCategory!.color)
+        
+        
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let name = selectedCategory?.name {
+           title = name
+        }
+
+        
     }
     
     //MARK:- tableViewDatasource Method
